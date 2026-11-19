@@ -18,7 +18,7 @@ public class SwagLoginSteps
 		 driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		driver.get("https://www.saucedemo.com/");
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 	}
 	@When("user enters valid username {string}")
 	public void user_enters_valid_username(String username) throws InterruptedException 
