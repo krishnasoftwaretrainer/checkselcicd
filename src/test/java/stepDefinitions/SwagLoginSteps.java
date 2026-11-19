@@ -3,6 +3,7 @@ package stepDefinitions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.cucumber.java.en.*;
 
@@ -12,7 +13,9 @@ public class SwagLoginSteps
 	@Given("user is on SwagLabs Login Page")
 	public void user_is_on_swag_labs_login_page() throws InterruptedException 
 	{
-		 driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless");
+		 driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		driver.get("https://www.saucedemo.com/");
 		Thread.sleep(2000);
