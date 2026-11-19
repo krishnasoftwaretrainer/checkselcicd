@@ -1,0 +1,59 @@
+name: Selenium Cucumber BDD - TestNG
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  bdd-execution:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Checkout source code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Java
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      # 3. Setup Chrome
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      # 4. Verify Java and Maven
+      - name: Verify Environment
+        run: |
+          java -version
+          mvn -version
+          google-chrome --version
+
+      # 5. Execute Selenium Cucumber TestNG tests
+      - name: Run BDD Tests
+        run: mvn clean test
+
+      # 6. Upload reports
+      - name: Upload Cucumber Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Cucumber-TestNG-Reports
+          path: |
+            target/cucumber-reports.html
+            target/cucumber.json
+            target/surefire-reports/
+          if-no-files-found: ignore
+          retention-days: 15
