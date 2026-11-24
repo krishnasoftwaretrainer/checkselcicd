@@ -6,9 +6,9 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    features = "src/test/resources/features/Swagvalidlogin.feature",
+    features = "src/test/resources/features/SwagScenariooutline.feature",
     glue = {"stepDefinitions"},
-    plugin = {"pretty", "html:target/cucumber-reports"},
+    plugin = {"pretty", "html:target/cucumber-reports.html"},
     monochrome = true
 )
 public class TestRunner {
